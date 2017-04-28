@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>一个闭包的小例子</title>
+</head>
+<body>
+	<ul id="ul1">
+		<li>0</li>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<ul id="ul2">
+		<li>0</li>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<script type="text/javascript">
+		window.onload = function () {
+			var ul1 = document.getElementById('ul1');
+			var li1 = ul1.getElementsByTagName('li');
+			var con = function (i){
+				var click = function (){
+					console.log(i);
+				}
+				return click;
+			}
+			for (var i = 0; i < li1.length; i++) {
+				li1[i].onclick = con(i)
+			}
+			var ul2 = document.getElementById('ul2');
+			var li2 = ul2.getElementsByTagName('li');
+
+			for (let i = 0; i < li2.length; i++) {
+				li2[i].onclick = function (){
+					console.log(i)
+				}
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数简化</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var fun1 = function (i) {
+			return (i + 1)
+		}
+		let fun2 = (i) => i + 1;
+		// 箭头函数没有自己的 this 
+		class Animal {
+			constructor () {
+				this.type = 'animal'
+			}
+			says (say) {
+				setInterval(() => {
+					console.log(this.type + 'says' + say)
+				},1000)
+			}
+		}
+		let animal = new Animal();
+		animal.says('xiaocheng');
+		// `` 
+		let cat = 'xiaocheng';
+		console.log('我的名字是 : ' + cat);
+		console.log(`我的名字是 : ${cat}`);
+	</script>
+</body>
+</html>
