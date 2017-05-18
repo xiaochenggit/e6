@@ -2,42 +2,34 @@ import yargs from 'yargs';
 
 const args = yargs
 
-	// 区分开发环境还是线上环境
+  .option('production',{
+    boolean:true,
+    default:false,
+    describe:'min all scripts'
+  })
 
-	.option('production',{
-		boolrean: true,
-		default: false,
-		describe: 'min all scripts'
-	})
+  .option('watch',{
+    boolean:true,
+    default:false,
+    describe:'watch all files'
+  })
 
-	// 监听文件变化
+  .option('verbose',{
+    boolean:true,
+    default:false,
+    describe:'log'
+  })
 
-	.option('watch',{
-		boolrean: true,
-		default: false,
-		describe: 'watch all file'
-	})
+  .option('sourcemaps',{
+    describe:'force the creation of sroucemaps'
+  })
 
-	// 是否输出日志
+  .option('port',{
+    string:true,
+    default:8080,
+    describe:'server port'
+  })
 
-	option('verbose',{
-		boolrean: true,
-		default: false,
-		describe: 'log'
-	})
+  .argv
 
-	// 强制生成 sourcemaps 
-
-	option('sourcemaps',{
-		describe: 'force the creation of sroucemaps'
-	})
-
-	// 端口
-
-	option('port',{
-		string: true,
-		default: 8080,
-		describe: 'server port'
-	})
-
-	.argv
+export default args;
