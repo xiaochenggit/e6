@@ -8703,51 +8703,70 @@
 
 	'use strict';
 
+	// 函数
 	{
-		console.log('10进制', 503);
-		console.log('8进制', 503);
+		// 函数的默认参数
+		var text = function text(name) {
+			var say = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'hello world';
+
+			console.log(name, say);
+		};
+
+		text('xiao');
+		text('xiao', 'kill me');
 	}
 
 	{
-		/**
-	  * Number.isFinite(n) {boolean} 判断 n 是不是非无穷大
-	  */
-		console.log('15', Number.isFinite(15));
-		console.log('NaN', Number.isFinite(NaN));
-		console.log('1/0', Number.isFinite('true' / 0));
-		console.log('NaN', Number.isNaN(NaN));
-		console.log('0', Number.isNaN(0));
+		// 此时 y 的取值 是函数里的 x
+		var _text = function _text(x) {
+			var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : x;
+
+			console.log(x, y);
+		};
+
+		var x = 'test';
+		_text('xiao');
 	}
 
 	{
-		/**
-	  * Number.isInteger(n) {boolean} 判断 n 是不是整数
-	  */
-		console.log('25', Number.isInteger(25));
-		console.log('25.0', Number.isInteger(25.0));
-		console.log('25.1', Number.isInteger(25.1));
-		console.log('25', Number.isInteger('25'));
+		var _text2 = function _text2() {
+			for (var _len = arguments.length, arg = Array(_len), _key = 0; _key < _len; _key++) {
+				arg[_key] = arguments[_key];
+			}
+
+			var _iteratorNormalCompletion = true;
+			var _didIteratorError = false;
+			var _iteratorError = undefined;
+
+			try {
+				for (var _iterator = arg[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+					var v = _step.value;
+
+					console.log('...arg', v);
+				}
+			} catch (err) {
+				_didIteratorError = true;
+				_iteratorError = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion && _iterator.return) {
+						_iterator.return();
+					}
+				} finally {
+					if (_didIteratorError) {
+						throw _iteratorError;
+					}
+				}
+			}
+		};
+
+		_text2(1, 2, 3, 4, 5, 6);
 	}
 
 	{
-		/**
-	  * Number 区间
-	  * Number.isSafeInteger(n) {boolean} 判断 n 是不是在安全范围内
-	  */
+		var _console;
 
-		console.log('\u6700\u5927\u533A\u95F4' + Number.MAX_SAFE_INTEGER);
-		console.log('\u6700\u5C0F\u533A\u95F4' + Number.MIN_SAFE_INTEGER);
-		console.log('10', Number.isSafeInteger(10));
-		console.log('a', Number.isSafeInteger('a'));
-	}
-
-	{
-		/**
-	  * Math.trunc(n) {Number} 取整
-	  */
-
-		console.log('4.1', Math.trunc(4.1));
-		console.log('4.9', Math.trunc(4.9));
+		(_console = console).log.apply(_console, [1, 2, 3, 4]);
 	}
 
 /***/ })
