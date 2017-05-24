@@ -1,2 +1,2 @@
 // import 'babel-polyfill';
-import './class/lession16';
+import Lottery from './lottery';
