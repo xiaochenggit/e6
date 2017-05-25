@@ -101,7 +101,7 @@ class Base{
 	changePlayNav(e) {
 		let self = this;
 		let $cur = $(e.currentTarget);
-		$cur.addClass('active').siblings().('active');
+		$cur.addClass('active').siblings().removeClass('active');
 		self.cur_play = $cur.attr('desc').toLocaleLowerCase();
 		$("#zx_sm span").html(self.play_list.get(self.cur_play).tip);
 		$(".boll_list .btn-boll").removeClass('btn-boll-active');
@@ -142,15 +142,15 @@ class Base{
 		// 选单
 		if (index === 3) {
 			$('.boll-list .btn-boll').each(function(i, item){
-				if (item.textContent%2 == 1) {
+				if (i % 2 == 0) {
 					$(item).addClass('btn-boll-active');
 				}
 			})
 		}
 		// 选双
-		if (index === 3) {
+		if (index === 4) {
 			$('.boll-list .btn-boll').each(function(i, item){
-				if (item.textContent%2 == 0) {
+				if (i % 2 == 1) {
 					$(item).addClass('btn-boll-active');
 				}
 			})
@@ -174,7 +174,7 @@ class Base{
 		let active = $active ? $active.length : 0 ;
 		let count = self.computeCount(active, self.cur_play);
 		if (count) {
-			self.addCodeItem($active.join(''), self.cur_play
+			self.addCodeItem($active.join(' '), self.cur_play
 				, self.play_list.get(self.cur_play).name, count);
 		}
 	}
@@ -190,7 +190,7 @@ class Base{
 		const tpl = `
 			<li codes="${type}|${code}" bonus="${count * 2}" count="${count}">
 				<div class="code">
-					<b>${typeName}${count > 1 ? 复试 : 单式}</b>
+					<b>${typeName}${count > 1 ? '复试' : '单式'}</b>
 					<b class='em'>${code}</b>
 					[${count}注,<em class="code-list-money">${count * 2}</em>元]
 				</div>
@@ -206,8 +206,8 @@ class Base{
 	getCount() {
 		let self = this;
 		let active = $('.boll-list .btn-boll-active').length;
-		let count = self.computeCount(active,self,cur_play);
-		let range = self.computeBonus(active,self,cur_play);
+		let count = self.computeCount(active,self.cur_play);
+		let range = self.computeBonuns(active,self.cur_play);
 		let money = count * 2;
 		// win1 最小盈利 win2 最大盈利
 		let win1 = range[0] - money;
@@ -239,6 +239,49 @@ class Base{
 	 * @return {[type]} [description]
 	 */
 	getTotal() {
-		
+		let count = 0;
+		$('.codelist li').each(function(index, item) {
+			count += $(item).attr('count') * 1;
+		});
+		$('#count').text(count);
+		$('#money').text(count * 2);
 	}
+	/**
+	 * [getRandom 生成随机数数组]
+	 * @param  {[type]} num [description]
+	 * @return {[string]}     [返回号码字符串]
+	 */
+	getRandom(num) {
+		let arr=[],index;
+		// Array.from 把类数组的集合转化为数组 
+		let number = Array.from(this.number);
+		while (num--) {
+			index = Number.parseInt(Math.random() * number.length);
+			arr.push(number[index]);
+			number.splice(index, 1);
+		}
+		return arr.join(' ');
+	}
+	/**
+	 * [getRandomCode 获得随机号码产生集合]
+	 * @param  {[doom]} e [点击的随机按钮]
+	 * @return {[type]}   [description]
+	 */
+	getRandomCode(e) {
+		e.preventDefault;
+		let num = e.currentTarget.getAttribute('count');
+		let play = this.cur_play.match(/\d+/g)[0];
+		let self = this;
+		if (num == 0) {
+			$(self.cart_el).html('')
+		} else {
+			for (let i = 0; i < num ; i ++) {
+				self.addCodeItem(self.getRandom(play), self.cur_play,
+				 self.play_list.get(self.cur_play).name, 1);
+			}
+		}
+		return false;
+	}	
 }
+
+export default Base;

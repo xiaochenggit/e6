@@ -14,7 +14,7 @@ class Calculate{
 		// 创建一个长度为 active 的数组 , 并且添满 '0'
 		const arr = new Array(active).fill('0');
 		if (exist && play_name.charAt(0) === 'r') {
-			count = Calculate.combine(arr,play_name.split('')[1]);
+			count = Calculate.combine(arr,play_name.split('')[1]).length;
 		}
 		return count;
 	}
@@ -48,7 +48,7 @@ class Calculate{
 				min = active - play[1] > -1 ? 1 : 0;
 			}
 			let max_active = Math.min(active, 5);
-			if (paly[1] - 5 > 0) {
+			if (play[1] - 5 > 0) {
 				if (active - play[1] >= 0) {
 					arr = new Array(active - 5).fill(0);
 					max = Calculate.combine(arr, play[1] - 5).length;
@@ -62,7 +62,7 @@ class Calculate{
 				max = 1;
 			}
 		}
-		return [min, max].map((item) => item.self.play_list.get(play_name).bonus); 
+		return [min, max].map((item) => item * self.play_list.get(play_name).bonus); 
 	}
 
 	/**
@@ -94,6 +94,7 @@ class Calculate{
 				}
 			}
 		})(arr, size, [])
+		return allResult;
 	}
 }
 

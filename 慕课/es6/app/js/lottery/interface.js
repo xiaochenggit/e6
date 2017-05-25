@@ -28,7 +28,7 @@ class Interface{
 	 */
 	getOpenCode(issue) {
 		let self = this;
-		return Promise((resolve, reject) => {
+		return new Promise((resolve, reject) => {
 			$.ajax({
 				url: '/get/opencode',
 				data: {
@@ -50,7 +50,7 @@ class Interface{
 	 */
 	getState(issue) {
 		let self = this;
-		return Promise((resolve, reject) => {
+		return new Promise((resolve, reject) => {
 			$.ajax({
 				url: '/get/state',
 				data: {

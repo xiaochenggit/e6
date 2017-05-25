@@ -7,7 +7,7 @@ class Timer{
 	countdown(end,update,handle) {
 		const now = new Date().getTime();
 		const self = this;
-		if (now > end) {
+		if (now - end > 0) {
 			handle.call(this);
 		} else {
 			let last_time = end - now;
@@ -15,7 +15,7 @@ class Timer{
 			const px_d = 1000*60*60*24;
 			const px_h = 1000*60*60;
 			const px_m = 1000*60;
-			const px_s = 1000*60;
+			const px_s = 1000;
 			// 计算 天、时、分、秒
 			let d = Math.floor(last_time / px_d);
 			let h = Math.floor((last_time - d * px_d) / px_h);
